@@ -12,13 +12,7 @@
 <script type="text/javascript">
 
 (function () {
-	function buildURL(
-		//param name
-	) {
-		var url = 'https://data.austintexas.gov/resource/ysrd-25kv.json';
-		return url;
 
-	}
 
     var myConnector = tableau.makeConnector();
 
@@ -40,11 +34,8 @@
 
     myConnector.getData = function (table, doneCallback) {
 	//	var artist = document.getElementById("artistName").value;
-		var connectionUri = buildURL(
-			//param
-		);
 		//console.log(param name)
-		$.getJSON(connectionUri, function(resp) {
+		$.getJSON('https://data.austintexas.gov/resource/ysrd-25kv.json', function(resp) {
 			var feat = resp,
 			tableData = [];
 			console.log(resp);
