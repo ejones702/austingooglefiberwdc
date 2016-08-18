@@ -75,7 +75,7 @@ h2 {
 
 	$(document).ready(function () {
 		$("#submitButton").click(function () {
-		var zipcode = document.getElementById("zipcode").value;
+		var article = $('#zipcode').val().trim();
 		if (zipcode) {
 		    	tableau.connectionData = JSON.stringify(zipcode);
 					tableau.connectionName = "City of Austin 100GB Speed Google Fiber for" + zipcode ;
