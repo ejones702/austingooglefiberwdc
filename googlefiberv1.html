@@ -1,7 +1,7 @@
 <html>
 
 <head>
-<title>City of Austin Purchase Orders</title>
+<title>City of Austin Google Fiber WDC Demo</title>
 <meta http-equiv="Cache-Control" content="no-store" />
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
@@ -33,14 +33,13 @@
 
 
     myConnector.getData = function (table, doneCallback) {
-	//	var artist = document.getElementById("artistName").value;
-		//console.log(param name)
+
 		$.getJSON('https://data.austintexas.gov/resource/ysrd-25kv.json', function(resp) {
 			var feat = resp,
 			tableData = [];
 			console.log(resp);
 
-			// Iterate over the JSON object
+
 			for (var i = 0, len = feat.length; i < len; i++) {
 				tableData.push({
 					"business_name": feat[i].business_name,
@@ -57,12 +56,10 @@
 
 	$(document).ready(function () {
 		$("#submitButton").click(function () {
-//		var artist = document.getElementById("artistName").value;
-//		if (artist) {
-//				tableau.connectionData = JSON.stringify(artist);
+
 					tableau.connectionName = "City of Austin 100GB Speed Google Fiber";
 					tableau.submit();
-//				};
+
 		});
 	});
 })();
@@ -72,13 +69,13 @@
 <body>
 
 <br>
-<center>itunes search connector - Working 7/21 2:00pm</center>
+<center>Your First Web Data Connector - Austin Google Fiber Locations</center>
 <div class="container container-table">
 	<div class="row vertical-center-row">
 		<form>
 		</form>
 			<div class="text-center col-md-4 col-md-offset-4">
-				<button type="button" id="submitButton" class="btn btn-success" style="margin: 10px;">Get View Data!</button>
+				<button type="button" id="submitButton" class="btn btn-success" style="margin: 10px;">Get Google Fiber Data!</button>
 			</div>
 	</div>
 </div>
