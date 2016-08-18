@@ -26,7 +26,7 @@ h2 {
 
 (function () {
 	function buildURL(zipcode) {
-		var url = 'https://data.austintexas.gov/resource/ysrd-25kv.json?location_zip=' + encodeURIComponent(zipcode);
+		var url = 'https://data.austintexas.gov/resource/ysrd-25kv.json?location_zip=' + zipcode;
 		return url;
 
 	}
@@ -36,6 +36,12 @@ h2 {
     myConnector.getSchema = function (schemaCallback) {
 		var cols = [
 			{ id : "business_name", alias : "business_name", dataType : tableau.dataTypeEnum.string },
+			{ id : "latitude", alias : "latitude", dataType : tableau.dataTypeEnum.float },
+			{ id : "longitude", alias : "longitude", dataType : tableau.dataTypeEnum.float },
+			{ id : "location_city", alias : "location_city", dataType : tableau.geographicRoleEnum.city },
+			{ id : "location_county", alias : "location_county", dataType : tableau.geographicRoleEnum.county }
+
+
 
 		];
 
@@ -50,7 +56,7 @@ h2 {
 
 
     myConnector.getData = function (table, doneCallback) {
-		var zipcode = document.getElementById("zipcode").value;
+		var zipcode = tableau.connectionData;
 		var connectionUri = buildURL(zipcode);
 		console.log(zipcode)
 		$.getJSON(connectionUri, function(resp) {
@@ -62,6 +68,11 @@ h2 {
 			for (var i = 0, len = feat.length; i < len; i++) {
 				tableData.push({
 					"business_name": feat[i].business_name,
+					"location_city": feat[i].location_city,
+					"location_county": feat[i].location_county,
+					"longitude": feat[i].location.longitude,
+					"latitude": feat[i].location.latitude
+
 				});
 			}
 
@@ -75,9 +86,9 @@ h2 {
 
 	$(document).ready(function () {
 		$("#submitButton").click(function () {
-		var article = $('#zipcode').val().trim();
+		var zipcode = $('#zipcode').val().trim();
 		if (zipcode) {
-		    	tableau.connectionData = JSON.stringify(zipcode);
+		    	tableau.connectionData = zipcode;
 					tableau.connectionName = "City of Austin 100GB Speed Google Fiber for" + zipcode ;
 					tableau.submit();
 				};
