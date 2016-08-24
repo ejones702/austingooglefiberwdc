@@ -39,7 +39,10 @@ h2 {
 			{ id : "latitude", alias : "latitude", aggType: tableau.aggTypeEnum.avg, columnRole: tableau.columnRoleEnum.dimension, dataType : tableau.dataTypeEnum.float },
 			{ id : "longitude", alias : "longitude", aggType: tableau.aggTypeEnum.avg, columnRole: tableau.columnRoleEnum.dimension, dataType : tableau.dataTypeEnum.float },
 			{ id : "location_city", alias : "location_city", dataType : tableau.dataTypeEnum.string, geographicRole : tableau.geographicRoleEnum.city },
-			{ id : "location_county", alias : "location_county",dataType : tableau.dataTypeEnum.string, geographicRole : tableau.geographicRoleEnum.county }
+			{ id : "location_county", alias : "location_county",dataType : tableau.dataTypeEnum.string, geographicRole : tableau.geographicRoleEnum.county },
+			{ id : "category", alias : "category", dataType : tableau.dataTypeEnum.string },
+
+
 
 
 
@@ -71,7 +74,8 @@ h2 {
 					"location_city": feat[i].location_city,
 					"location_county": feat[i].location_county,
 					"longitude": feat[i].location.longitude,
-					"latitude": feat[i].location.latitude
+					"latitude": feat[i].location.latitude,
+					"category": feat[i].category,
 
 				});
 			}
