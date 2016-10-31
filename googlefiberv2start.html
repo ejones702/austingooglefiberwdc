@@ -36,11 +36,7 @@ h2 {
     myConnector.getSchema = function (schemaCallback) {
 		var cols = [
 			{ id : "business_name", alias : "business_name", dataType : tableau.dataTypeEnum.string },
-			{ id : "latitude", alias : "latitude", aggType: tableau.aggTypeEnum.avg, columnRole: tableau.columnRoleEnum.dimension, dataType : tableau.dataTypeEnum.float },
-			{ id : "longitude", alias : "longitude", aggType: tableau.aggTypeEnum.avg, columnRole: tableau.columnRoleEnum.dimension, dataType : tableau.dataTypeEnum.float },
-			{ id : "location_city", alias : "location_city", dataType : tableau.dataTypeEnum.string, geographicRole : tableau.geographicRoleEnum.city },
-			{ id : "location_county", alias : "location_county",dataType : tableau.dataTypeEnum.string, geographicRole : tableau.geographicRoleEnum.county },
-			{ id : "category", alias : "category", dataType : tableau.dataTypeEnum.string },
+		//Add additional columns
 
 
 
@@ -71,11 +67,7 @@ h2 {
 			for (var i = 0, len = feat.length; i < len; i++) {
 				tableData.push({
 					"business_name": feat[i].business_name,
-					"location_city": feat[i].location_city,
-					"location_county": feat[i].location_county,
-					"longitude": feat[i].location.longitude,
-					"latitude": feat[i].location.latitude,
-					"category": feat[i].category,
+						//add new data
 
 				});
 			}
@@ -90,15 +82,8 @@ h2 {
 
 	$(document).ready(function () {
 		$("#submitButton").click(function () {
-		var zipcode = $('#zipcode').val().trim();
-		if (zipcode) {
-		    	tableau.connectionData = zipcode;
-					tableau.connectionName = "City of Austin 100GB Speed Google Fiber for" + zipcode ;
-					tableau.submit();
-				};
-		});
-	});
-})();
+					//Add Zipcode Input
+
 </script>
 </head>
 
@@ -110,9 +95,7 @@ h2 {
 	<div class="row vertical-center-row">
 		<form>
 		</form>
-		<div class="form-group">
-			<input class="form-control" align="center" type="text" id="zipcode" placeholder="Please enter Austin Zipcode"/>
-		</div>
+		//Insert User Input
 			<div class="text-center col-md-4 col-md-offset-4">
 				<button type="button" id="submitButton" color="blue" class="btn btn-success" style="margin: 10px;">Connect to Fiber Data</button>
 			</div>
