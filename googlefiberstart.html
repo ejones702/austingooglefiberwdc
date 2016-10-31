@@ -13,13 +13,57 @@
 <!--Here is where we will do the most work-->
     <script type="text/javascript">
 
-    //put makeConnector statement here
+ (function () {
 
-    //put getSchema statement here
 
-    //put getData statement here
+    var myConnector = tableau.makeConnector();
 
-    //put event listener here
+        myConnector.getSchema = function (schemaCallback) {
+		var cols = [
+			{ id : "business_name", alias : "business_name", dataType : tableau.dataTypeEnum.string },
+
+		];
+
+		var tableInfo = {
+			id : "googlefiber",
+			alias : "googlefiber",
+			columns : cols
+		};
+
+		schemaCallback([tableInfo]);
+    };
+
+  myConnector.getData = function (table, doneCallback) {
+
+		$.getJSON('https://data.austintexas.gov/resource/ysrd-25kv.json', function(resp) {
+			var feat = resp,
+			tableData = [];
+			console.log(resp);
+
+
+			for (var i = 0, len = feat.length; i < len; i++) {
+				tableData.push({
+					"business_name": feat[i].business_name,
+				});
+			}
+
+			table.appendRows(tableData);
+			doneCallback();
+		});
+
+    };
+
+    tableau.registerConnector(myConnector);
+
+	$(document).ready(function () {
+		$("#submitButton").click(function () {
+
+					tableau.connectionName = "City of Austin 100GB Speed Google Fiber";
+					tableau.submit();
+
+		});
+	});
+})();
 
 	</script>
 </head>
@@ -29,7 +73,7 @@
     <div class="container container-table">
         <div class="row vertical-center-row">
             <div class="text-center col-md-4 col-md-offset-4">
-                <button type="button" id="submitButton" class="btn btn-success" style="margin: 10px;">Get Earthquake Data!</button>
+                <button type="button" id="submitButton" class="btn btn-success" style="margin: 10px;">Get Google Fiber Data</button>
             </div>
         </div>
     </div>
